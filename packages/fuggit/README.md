@@ -1,6 +1,7 @@
-# fuggit
+<p align="center">
+  <img width="300" height="300" src="./fuggit.png">
+</p>
 
-This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 
