@@ -29,6 +29,8 @@
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "updateBuildableProjectDepsInPackageJson": true,
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "outputPath": "dist/packages/fuggit",
         "tsConfig": "packages/fuggit/tsconfig.lib.json",
         "packageJson": "packages/fuggit/package.json",
