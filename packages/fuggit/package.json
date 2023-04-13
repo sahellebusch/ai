@@ -1,4 +1,8 @@
 {
   "name": "fuggit",
-  "version": "0.0.2"
+  "version": "0.0.2",
+  "dependencies": {
+    "@swc/helpers": "~0.4.11"
+  },
+  "devDependencies": {}
 }
