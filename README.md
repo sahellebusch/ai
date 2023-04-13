@@ -15,3 +15,9 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 ## Further help
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
+
+## Creating A New Node Package 
+
+``` sh
+nx g @nrwl/node:lib my-new-app
+```
