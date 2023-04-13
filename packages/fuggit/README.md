@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" height="250" src="./fuggit.png">
+  <img width="300" height="220" src="./fuggit.png">
 </p>
 
 
