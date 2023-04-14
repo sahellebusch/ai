@@ -1,5 +1,4 @@
 import * as os from 'os';
-import inquirer from 'inquirer';
 import axios from 'axios';
 import ora from 'ora';
 
@@ -18,15 +17,7 @@ type CompletionType = {
   choices: Choice[];
 };
 
-type InputResponse = {
-  input: string;
-};
-
-type ChoiceResponse = {
-  choice: boolean;
-};
-
-export class ChatBot {
+export class OpenAI {
   private readonly shell = os.userInfo().shell;
   private readonly messageHistory: Message[] = [
     {
@@ -95,40 +86,5 @@ export class ChatBot {
     }
 
     return cmd;
-  }
-
-  async promptForInput(message: string): Promise<InputResponse> {
-    return inquirer.prompt([
-      {
-        type: 'input',
-        name: 'input',
-        message,
-      },
-    ]);
-  }
-
-  async promptForChoice(message: string): Promise<ChoiceResponse> {
-    return inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'choice',
-        message,
-        default: true,
-      },
-    ]);
-  }
-
-  async promptForList<T>(
-    message: string,
-    choices: string[]
-  ): Promise<{ choice: T }> {
-    return inquirer.prompt([
-      {
-        type: 'list',
-        name: 'choice',
-        message,
-        choices,
-      },
-    ]);
   }
 }

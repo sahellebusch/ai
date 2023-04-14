@@ -4,41 +4,36 @@ import clipboard from 'clipboardy';
 import { Command } from 'commander';
 import { promisify } from 'util';
 import { exec } from 'child_process';
-import { green, red, bold } from 'colorette';
-import { ChatBot } from './chatbot.js';
+import { OpenAI } from './openai.js';
+import * as Facilitator from './facilitator.js'
 
 const execAsync = promisify(exec);
 const program = new Command();
-const chatBot = new ChatBot();
+const chatBot = new OpenAI();
 
 async function execCmd(cmd: string): Promise<void> {
-  console.log(bold(green('Attempting command')));
+  Facilitator.attemptingCommand()
   const { stdout } = await execAsync(cmd);
   console.log(stdout);
 }
 
 async function run(thePrompt: string): Promise<void> {
   if (!thePrompt) {
-    console.log(red('Something went wrong, please try agian.'));
+    Facilitator.somethingWentWrong();
     process.exit(1);
   }
 
   const cmd = await chatBot.ask(thePrompt);
-  const { choice } = await chatBot.promptForList<'Yes' | 'No' | 'Copy to Clipboard'>(
-    `Here's what we got:\n${cmd}\n\nWant to try it?`,
-    ['Yes', 'No','Copy to Clipboard']
-  );
+  const { choice } = await Facilitator.wantToTryIt(cmd);
 
   if (choice === 'No') {
-    const { choice } = await chatBot.promptForChoice(
-      'Want to try generating another command?'
-    );
+    const { choice } = await Facilitator.askForAnotherCmd();
 
     if (!choice) {
       process.exit()
     }
 
-    const { input } = await chatBot.promptForInput('Any more details to add?');
+    const { input } = await Facilitator.getMoreDetails();
     await run(input);
   }
 
@@ -49,13 +44,11 @@ async function run(thePrompt: string): Promise<void> {
 
   try {
     await execCmd(cmd);
-    console.log(bold(green('Success!')));
+    Facilitator.success()
     process.exit();
   } catch (error) {
-    console.log(bold(red("Bummer, it didn't work.")));
-    console.log(red(error.toString()));
-    const { choice } = await chatBot.promptForChoice('Want to try again?');
-
+    Facilitator.cmdFailed(error);
+    const { choice } = await Facilitator.tryAgain();
     if (choice) {
       await run(thePrompt);
     }
@@ -64,7 +57,7 @@ async function run(thePrompt: string): Promise<void> {
 }
 
 program.version('0.0.1').action(async () => {
-  const { input } = await chatBot.promptForInput('Whatcha trying to do?');
+  const { input } = await Facilitator.whatchaDoin();
   await run(input);
 });
 
