@@ -117,4 +117,18 @@ export class ChatBot {
       },
     ]);
   }
+
+  async promptForList<T>(
+    message: string,
+    choices: string[]
+  ): Promise<{ choice: T }> {
+    return inquirer.prompt([
+      {
+        type: 'list',
+        name: 'choice',
+        message,
+        choices,
+      },
+    ]);
+  }
 }

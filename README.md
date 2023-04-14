@@ -19,5 +19,12 @@ Visit the [Nx Documentation](https://nx.dev) to learn more.
 ## Creating A New Node Package 
 
 ``` sh
-nx g @nrwl/node:lib my-new-app
+nx g @nrwl/node:lib my-new-lib --publishable --importPath=my-new-lib 
 ```
+
+## Building
+
+``` sh
+nx run-many --target=build my-lib 
+```
+

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import clipboard from 'clipboardy';
 import { Command } from 'commander';
 import { promisify } from 'util';
 import { exec } from 'child_process';
@@ -23,19 +24,27 @@ async function run(thePrompt: string): Promise<void> {
   }
 
   const cmd = await chatBot.ask(thePrompt);
-  const { choice } = await chatBot.promptForChoice(
-    `Here's what we got:\n${cmd}\n\nWant to try it?`
+  const { choice } = await chatBot.promptForList<'Yes' | 'No' | 'Copy to Clipboard'>(
+    `Here's what we got:\n${cmd}\n\nWant to try it?`,
+    ['Yes', 'No','Copy to Clipboard']
   );
 
-  if (!choice) {
+  if (choice === 'No') {
     const { choice } = await chatBot.promptForChoice(
       'Want to try generating another command?'
     );
+
     if (!choice) {
-      return;
+      process.exit()
     }
+
     const { input } = await chatBot.promptForInput('Any more details to add?');
     await run(input);
+  }
+
+  if(choice === 'Copy to Clipboard') {
+     clipboard.writeSync(cmd);
+    process.exit();
   }
 
   try {
