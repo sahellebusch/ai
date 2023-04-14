@@ -45,8 +45,19 @@ export async function askForAnotherCmd(): Promise<ChoiceResponse> {
   return promptForChoice('Want to try generating another command?');
 }
 
-export async function getMoreDetails(): Promise<InputResponse> {
-  return promptForInput('Any more details to add?');
+export async function getMoreDetails(): Promise<{ input: string | null }> {
+  let { input } = await promptForInput('Any more details to add?');
+  input = input.toLowerCase();
+
+  // brute force, oh well.
+  if (
+    !input ||
+    input.includes('n') ||
+    input.includes('no') ||
+    input.includes('nope')
+  ) {
+    return { input: null };
+  }
 }
 
 export async function tryAgain(): Promise<ChoiceResponse> {

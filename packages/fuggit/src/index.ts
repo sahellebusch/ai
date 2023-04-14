@@ -34,7 +34,11 @@ async function run(thePrompt: string): Promise<void> {
     }
 
     const { input } = await Facilitator.getMoreDetails();
-    await run(input);
+    if(input) {
+      await run(input);
+    }
+
+    await run(thePrompt)
   }
 
   if(choice === 'Copy to Clipboard') {
