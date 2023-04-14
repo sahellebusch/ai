@@ -13,7 +13,7 @@ const chatBot = new ChatBot();
 async function execCmd(cmd: string): Promise<void> {
   console.log(bold(green('Attempting command')));
   const { stdout } = await execAsync(cmd);
-  console.log(green(stdout));
+  console.log(stdout);
 }
 
 async function run(thePrompt: string): Promise<void> {

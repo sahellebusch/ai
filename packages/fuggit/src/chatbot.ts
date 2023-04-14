@@ -1,6 +1,7 @@
 import * as os from 'os';
 import inquirer from 'inquirer';
 import axios from 'axios';
+import ora from 'ora';
 
 type Roles = 'system' | 'assistant' | 'user';
 
@@ -41,6 +42,11 @@ export class ChatBot {
   }
 
   async ask(content: string): Promise<string> {
+    const spinner = ora({
+      text: 'Requesting help from our overlords',
+      spinner: 'bouncingBar',
+    }).start();
+
     try {
       this.messageHistory.push({
         role: 'user',
@@ -61,8 +67,10 @@ export class ChatBot {
       });
 
       this.messageHistory.push(edit.data.choices[0].message);
+      spinner.succeed();
       return this.parseCmd(edit.data.choices[0].message.content);
     } catch (error) {
+      spinner.fail();
       throw new Error(`Chat error occurred: ${error.data.message}`);
     }
   }
