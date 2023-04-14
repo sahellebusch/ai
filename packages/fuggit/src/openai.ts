@@ -34,7 +34,7 @@ export class OpenAI {
 
   async ask(content: string): Promise<string> {
     const spinner = ora({
-      text: 'Requesting help from our overlords',
+      text: 'Requesting help from our overlords...',
       spinner: 'bouncingBar',
     }).start();
 

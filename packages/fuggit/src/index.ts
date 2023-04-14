@@ -60,7 +60,7 @@ async function run(thePrompt: string): Promise<void> {
   }
 }
 
-program.version('0.0.1').action(async () => {
+program.version('1.0.0').action(async () => {
   const { input } = await Facilitator.whatchaDoin();
   await run(input);
 });
