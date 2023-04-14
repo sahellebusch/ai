@@ -1,8 +1,22 @@
 {
   "name": "fuggit",
-  "version": "0.0.2",
-  "dependencies": {
-    "@swc/helpers": "~0.4.11"
+  "description": "Low-fi chat assistant to help a user generate a CLI command.",
+  "license": "MIT",
+  "homepage": "https://github.com/sahellebusch/ai/blob/main/packages/fuggit/README.md",
+  "bin": {
+    "fuggit": "./src/index.js"
   },
-  "devDependencies": {}
+  "bugs": {
+  "url" : "https://github.com/sahellebusch/ai/issues",
+  "email" : "sahellebusch@gmail.com"
+},
+  "version": "1.0.0",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sahellebusch/ai",
+    "directory": "packages/fuggit"
+  },
+  "devDependencies": {},
+  "type": "module"
 }
