@@ -58,6 +58,8 @@ export async function getMoreDetails(): Promise<{ input: string | null }> {
   ) {
     return { input: null };
   }
+
+  return { input };
 }
 
 export async function tryAgain(): Promise<ChoiceResponse> {
