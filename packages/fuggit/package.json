@@ -7,9 +7,9 @@
     "fuggit": "./src/index.js"
   },
   "bugs": {
-  "url" : "https://github.com/sahellebusch/ai/issues",
-  "email" : "sahellebusch@gmail.com"
-},
+    "url": "https://github.com/sahellebusch/ai/issues",
+    "email": "sahellebusch@gmail.com"
+  },
   "version": "1.0.1",
   "dependencies": {},
   "repository": {

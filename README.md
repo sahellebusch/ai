@@ -16,15 +16,14 @@ Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and 
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
 
-## Creating A New Node Package 
+## Creating A New Node Package
 
-``` sh
-nx g @nrwl/node:lib my-new-lib --publishable --importPath=my-new-lib 
+```sh
+nx g @nx/node:lib my-new-lib --publishable --importPath=my-new-lib
 ```
 
 ## Building
 
-``` sh
-nx run-many --target=build my-lib 
+```sh
+nx run-many --target=build my-lib
 ```
-
